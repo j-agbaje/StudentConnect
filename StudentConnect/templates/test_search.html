@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    {% if title %}
+    <title>{{ title }} </title>
+    {% else %}
+    <title>StudentConnect</title>
+    {% endif %}
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='esigned_css/bootstrap.css') }}" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='esigned_css/style.css') }}" rel="stylesheet" />
+
+    <!-- responsive style -->
+    <link href="{{ url_for('static', filename='esigned_css/responsive.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main_min.css')}}">
+</head>
+
+<body class="sub_page">
+    <div class="flash_message">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    <div class="hero_area" style="padding: 0; margin: 0;">
+        <!-- header section starts -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container pt-0 pb-0">
+                    <a class="navbar-brand" href="{{ url_for('home') }}">
+                        <span>StudentConnect</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ url_for('home') }}">Home <span
+                                            class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('about') }}"> About </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('contact') }}">Contact us<a>
+                                </li>
+                                {% if current_user.is_authenticated %}
+                                <a class="nav-link" href="{{ url_for('logout') }}"> Logout </a>
+                                {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('register') }}"> Sign Up </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                            <div class="user_option">
+                                <a href="{{ url_for('profile') }}">
+                                    <img src="{{ url_for('static', filename='images/user.png') }}" alt="">
+                                </a>
+    
+                                <a href="{{ url_for('search') }}">
+                                    <button class="btn  my-2 my-sm-0 nav_search-btn ml-3" type="submit"></button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+
+    <section id="search" class="pt-5 pb-5">
+        <div class="search_div">
+            <!-- Search Form -->
+            <div class="justify-center pl-60 ml-96">
+                <form action="/search" method="POST" id="search_form">
+                    <input type="text" placeholder="Search here..." name="search"
+                        class="border-2 border-gray-700 mt-10 w-2/5 py-3 px-4"></input>
+                    <button class="bg-blue-700 text-xl hover:bg-blue-500 text-white py-2 px-3">
+                        Search
+                    </button>
+                </form>
+            </div>
+
+            <!-- Display search error or results -->
+            <!-- <div>
+                {% if es_error %}
+                <h2 class="text-gray-800 font-bold pl-2/5 mt-10">{{ es_error }}</h2>
+                {% endif %}
+            </div> -->
+
+            <!-- Display the search results -->
+            <div class="justify-items-center">
+                <div class="grid gap-8 grid-cols-3 mt-5">
+                    {% for d in data %}
+                    <a href="{{ url_for('user_profile', username=d.username) }}" style="color: black;">
+                        <div
+                            class="transition duration-500 ease-in-out flex py-3 px-2 hover:bg-blue-400 transform hover:-translate-y-1 hover:scale-110 hover:text-white hover:shadow-none hover:rounded border border-gray-300 shadow-lg">
+                            <img src="{{ url_for('static', filename='images/profile_pics/' ~ d['profile_picture']) }}"
+                                class="h-10 w-10 mr-20 ml-8  " alt="Profile Picture">
+                            <div class="w-3/5 mr-0">
+                                <h2 class="text-gray-800 font-bold">{{ d['username'] }}</h2>
+                                <p><strong>Full Name:</strong> {{ d['full_name'] }}</p>
+                                <p><strong>University:</strong> {{ d['school'] }}</p>
+                                <p><strong>Course:</strong> {{ d['course'] }}</p>
+                                <p><strong>Language:</strong> {{ d['primary_language'] }}</p>
+                            </div>
+                        </div>
+                    </a>
+                   
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info_section footer_section_search" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="info_contact">
+                        <h5>About Shop</h5>
+                        <div>
+                            <div class="img-box">
+                                <img src="{{ url_for('static', filename='images/location-white.png') }}" width="18px"
+                                    alt="">
+                            </div>
+                            <p>Address</p>
+                        </div>
+                        <div>
+                            <div class="img-box">
+                                <img src="{{ url_for('static', filename='images/telephone-white.png') }}" width="12px"
+                                    alt="">
+                            </div>
+                            <p>+01 1234567890</p>
+                        </div>
+                        <div>
+                            <div class="img-box">
+                                <img src="{{ url_for('static', filename='images/envelope-white.png') }}" width="18px"
+                                    alt="">
+                            </div>
+                            <p>demo@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info_info">
+                        <h5>Informations</h5>
+                        <p>ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info_insta">
+                        <h5>Instagram</h5>
+                        <div class="insta_container">
+                            <div>
+                                <a href="">
+                                    <div class="insta-box b-1">
+                                        <img src="{{ url_for('static', filename='images/insta.png') }}" alt="">
+                                    </div>
+                                </a>
+                                <a href="">
+                                    <div class="insta-box b-2">
+                                        <img src="{{ url_for('static', filename='images/insta.png') }}" alt="">
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div>
+                                <a href="">
+                                    <div class="insta-box b-3">
+                                        <img src="{{ url_for('static', filename='images/insta.png') }}" alt="">
+                                    </div>
+                                </a>
+                                <a href="">
+                                    <div class="insta-box b-4">
+                                        <img src="{{ url_for('static', filename='images/insta.png') }}" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info_form">
+                        <h5>Newsletter</h5>
+                        <form action="">
+                            <input type="email" placeholder="Enter your email">
+                            <button>Subscribe</button>
+                        </form>
+
+                            <div class="social_box">
+                                <a href="">
+                                    <img src="{{ url_for('static', filename='images/fb.png') }}" alt="">
+                                </a>
+                                <a href="">
+                                    <img src="{{ url_for('static', filename='images/twitter.png') }}" alt="">
+                                </a>
+                                <a href="">
+                                    <img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="">
+                                </a>
+                                <a href="">
+                                    <img src="{{ url_for('static', filename='images/youtube.png') }}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end info_section -->
+
+        <!-- footer section -->
+        <section class="container-fluid footer_section">
+            <!-- Footer content -->
+        </section>
+        <!-- end footer section -->
+
+        <!-- JavaScript files -->
+        <script type="text/javascript" src="{{ url_for('static', filename='esigned_js/jquery-3.4.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='esigned_js/bootstrap.js') }}"></script>
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+        <!-- owl carousel script -->
+        <script type="text/javascript">
+            $(".owl-carousel").owlCarousel({
+                loop: true,
+                margin: 0,
+                navText: [],
+                center: true,
+                autoplay: true,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
+        </script>
+    </div>
+
+    
+<!-- end owl carousel script -->
+
+</body>
+
+</html>
+

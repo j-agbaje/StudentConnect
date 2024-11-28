@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 mt-5 pt-5 mb-5 pb-5">
+            <div class="flash_message-login">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+            <!-- Register Form -->
+            <form method="POST" action="">
+                {{ form.hidden_tag() }} <!-- CSRF protection -->
+
+                <!-- Fieldset with legend -->
+                <fieldset class="border rounded p-4 shadow">
+                    <legend class="w-auto text-center mx-auto mb-4 px-3 font-weight-bold text-primary">
+                        Login
+                    </legend>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        {{ form.email.label(class="form-label") }}
+                        {{ form.email(class="form-control" if not form.email.errors else "form-control is-invalid") }}
+                        {% if form.email.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        {{ form.password.label(class="form-label") }}
+                        {{ form.password(class="form-control" if not form.password.errors else "form-control
+                        is-invalid") }}
+                        {% if form.password.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-check">
+                        {{ form.remember(class ="form-check-input") }}
+                        {{ form.remember.label(class="form-check-label") }}
+
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="text-center">
+                        {{ form.submit(class="btn btn-primary btn-block") }}
+                    </div>
+                </fieldset>
+            </form>
+            <div class="border-top pt-3 text-center">
+                <small class="text-muted">
+                    <a class="ml-2" href="{{ url_for('register') }}">Don't have an account? Sign Up here</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+   
