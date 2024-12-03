@@ -1,4 +1,4 @@
-node_modules/
-.venv/
 .env/
-replace.txt/
+.venv/
+node_modules/
+replace.txt
