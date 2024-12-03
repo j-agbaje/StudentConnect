@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<section class="container mt-5 mb-5 pb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h5>Welcome to Chat Room: <span class="font-weight-bold">{{ room }}</span></h5>
+                </div>
+                <div class="card-body chat-body">
+                    <div id="messages" class="mb-4"
+                        style="height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; background-color: #f8f9fa;">
+                    </div>
+
+                    <form id="message_input_form" class="d-flex">
+                        <input type="text" id="message_input" class="form-control mr-2"
+                            placeholder="Enter your message here">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script>
+    const socket = io("https://49e5-37-120-216-74.ngrok-free.app");
+
+    socket.on('connect', function () {
+        // Emit join room event with dynamic room and username
+        socket.emit('join_room', {
+            username: "{{ username }}",
+            room: "{{ room }}"
+        });
+
+        // Send message handler
+        let message_input = document.getElementById('message_input');
+
+        document.getElementById('message_input_form').onsubmit = function (e) {
+            e.preventDefault();
+            let message = message_input.value.trim();
+            if (message.length) {
+                socket.emit('send_message', {
+                    username: "{{ username }}",
+                    room: "{{ room }}",
+                    message: message
+                });
+            }
+            message_input.value = ''; // Clear input
+            message_input.focus();
+        };
+
+        // Leave room on page unload
+        window.onbeforeunload = function () {
+            socket.emit('leave_room', {
+                username: "{{ username }}",
+                room: "{{ room }}"
+            });
+        };
+
+        // Message received handler
+        socket.on('receive_message', function (data) {
+            const newNode = document.createElement('div');
+            newNode.className = 'p-2 border-bottom';
+            newNode.innerHTML = `<b>${data.username}:&nbsp;</b> ${data.message}`;
+            document.getElementById('messages').appendChild(newNode);
+            document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+        });
+
+        // Room join and leave announcements
+        socket.on('join_room_announcement', function (data) {
+            const newNode = document.createElement('div');
+            newNode.className = 'text-success p-2 border-bottom';
+            newNode.innerHTML = `<b>${data.username}</b> has joined the room`;
+            document.getElementById('messages').appendChild(newNode);
+        });
+
+        socket.on('leave_room_announcement', function (data) {
+            const newNode = document.createElement('div');
+            newNode.className = 'text-danger p-2 border-bottom';
+            newNode.innerHTML = `<b>${data.username}</b> has left the room`;
+            document.getElementById('messages').appendChild(newNode);
+        });
+    });
+</script>
+
+{% endblock %}
+

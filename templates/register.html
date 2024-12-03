@@ -1,0 +1,282 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 mt-5 pt-5 mb-5 pb-5">
+            <!-- Register Form -->
+            <form method="POST" action="">
+                {{ form.hidden_tag() }} <!-- CSRF protection -->
+
+                <!-- Fieldset with legend -->
+                <fieldset class="border rounded p-4 shadow">
+                    <legend class="w-auto text-center mx-auto mb-4 px-3 font-weight-bold text-primary">
+                        Sign Up
+                    </legend>
+
+                    <!-- Full Name input -->
+                    <div class="form-outline mb-4">
+                        {{ form.full_name.label(class="form-label required") }}
+                        {{ form.full_name(class="form-control" if not form.full_name.errors else "form-control
+                        is-invalid") }}
+                        {% if form.full_name.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.full_name.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Username input -->
+                    <div class="form-outline mb-4">
+                        {{ form.username.label(class="form-label required") }}
+                        {{ form.username(class="form-control" if not form.username.errors else "form-control
+                        is-invalid") }}
+                        {% if form.username.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        {{ form.email.label(class="form-label required") }}
+                        {{ form.email(class="form-control" if not form.email.errors else "form-control is-invalid") }}
+                        {% if form.email.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- University Name input -->
+                    <div class="form-outline mb-4">
+                        {{ form.school.label(class="form-label required") }}
+                        {{ form.school(class="form-control" if not form.school.errors else "form-control is-invalid") }}
+                        {% if form.school.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.school.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- First Language input -->
+                    <div class="form-outline mb-4">
+                        {{ form.primary_language.label(class="form-label required") }}
+                        {{ form.primary_language(class="form-control" if not form.primary_language.errors else
+                        "form-control is-invalid") }}
+                        {% if form.primary_language.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.primary_language.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Other Languages input -->
+                    <div class="form-outline mb-4">
+                        {{ form.other_language.label(class="form-label optional") }}
+                        {{ form.other_language(class="form-control" if not form.other_language.errors else "form-control
+                        is-invalid") }}
+                        {% if form.other_language.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.other_language.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Country of Origin input -->
+                    <div class="form-outline mb-4">
+                        {{ form.country.label(class="form-label required") }}
+                        {{ form.country(class="form-control" if not form.country.errors else "form-control is-invalid")
+                        }}
+                        {% if form.country.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.country.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Major/Field of Study input -->
+                    <div class="form-outline mb-4">
+                        {{ form.course.label(class="form-label required") }}
+                        {{ form.course(class="form-control" if not form.course.errors else "form-control is-invalid") }}
+                        {% if form.course.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.course.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Mobile Number input -->
+                    <div class="form-outline mb-4">
+                        {{ form.mobile_number.label(class="form-label optional") }}
+                        {{ form.mobile_number(class="form-control" if not form.mobile_number.errors else "form-control
+                        is-invalid") }}
+                        {% if form.mobile_number.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.mobile_number.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- WhatsApp Number input -->
+                    <div class="form-outline mb-4">
+                        {{ form.whatsapp_number.label(class="form-label optional") }}
+                        {{ form.whatsapp_number(class="form-control" if not form.whatsapp_number.errors else
+                        "form-control is-invalid") }}
+                        {% if form.whatsapp_number.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.whatsapp_number.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Instagram Handle input -->
+                    <div class="form-outline mb-4">
+                        {{ form.instagram_handle.label(class="form-label optional") }}
+                        {{ form.instagram_handle(class="form-control" if not form.instagram_handle.errors else
+                        "form-control is-invalid") }}
+                        {% if form.instagram_handle.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.instagram_handle.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- LinkedIn Handle input -->
+                    <div class="form-outline mb-4">
+                        {{ form.linkedin_handle.label(class="form-label optional") }}
+                        {{ form.linkedin_handle(class="form-control" if not form.linkedin_handle.errors else
+                        "form-control is-invalid") }}
+                        {% if form.linkedin_handle.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.linkedin_handle.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Interests input -->
+                    <div class="form-outline mb-4">
+                        {{ form.interests.label(class="form-label optional") }}
+                        {{ form.interests(class="form-control" if not form.interests.errors else "form-control
+                        is-invalid") }}
+                        {% if form.interests.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.interests.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Bio input -->
+                    <div class="form-outline mb-4">
+                        {{ form.bio.label(class="form-label optional") }}
+                        {{ form.bio(class="form-control", style="height: 150px; overflow-y: auto;", placeholder="Tell us a little about yourself...") }}
+                        <small id="bioCharacterCount" class="form-text text-muted">0/1000</small>
+                        {% if form.bio.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.bio.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        {{ form.password.label(class="form-label required") }}
+                        {{ form.password(class="form-control" if not form.password.errors else "form-control
+                        is-invalid") }}
+                        {% if form.password.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Confirm Password input -->
+                    <div class="form-outline mb-4">
+                        {{ form.confirm_password.label(class="form-label required") }}
+                        {{ form.confirm_password(class="form-control" if not form.confirm_password.errors else
+                        "form-control is-invalid") }}
+                        {% if form.confirm_password.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <div class="text-center mb-4">
+                            {{ form.profile_picture.label() }}
+                            {{ form.profile_picture(class="form-control-file d-inline-block") }}
+                            {% if form.profile_picture.errors %}
+                            {% for error in form.profile_picture.errors %}
+                                <span class="text-danger">{{ error }}</span><br>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <!-- <div class="form-group">
+                            {{ form.submit(class="btn btn-primary btn-block") }}
+                        </div> -->
+                    </form>
+
+                    <!-- Submit button -->
+                    <div class=" form-group text-center">
+                        {{ form.submit(class="btn btn-primary btn-block") }}
+                    </div>
+                </fieldset>
+            </form>
+            <div class="border-top pt-3 text-center">
+                <small class="text-muted">
+                    <a class="ml-2" href="{{ url_for('login') }}">Already have an account? Login here</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Character count script for the bio field
+    const bioInput = document.querySelector('textarea[name="bio"]');
+    const bioCharacterCount = document.getElementById('bioCharacterCount');
+
+    bioInput.addEventListener('input', function () {
+        const currentLength = bioInput.value.length;
+        bioCharacterCount.textContent = `${currentLength}/1000`; // Update the counter
+    });
+</script>
+
+{% endblock content %}
+
+

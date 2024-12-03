@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 mt-5 pt-5 mb-5 pb-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <!-- User Profile Picture and Basic Info -->
+                    <div class="text-center">
+                        <div class="profile_picture_edit"><img class="rounded-circle mb-4"
+                            src="{{ url_for('static', filename='images/profile_pics/' + current_user.profile_picture) }}"
+                            alt="Profile Picture" width="150" height="150"></div>
+                        
+
+                        <h3 class="text-primary">{{ user.full_name }}</h3>
+                        <p class="text-secondary">{{ user.email }}</p>
+                    </div>
+
+                    <!-- User Information Section -->
+                    <div class="mt-4">
+                        <h4 class="text-center text-primary">Profile Information</h4>
+                        <div class="table-responsive mt-3">
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Username</th>
+                                        <td>{{ user.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Bio</th>
+                                        <td>{{ user.bio or 'Not Provided' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">University</th>
+                                        <td>{{ user.school }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Primary Language</th>
+                                        <td>{{ user.primary_language }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Other Languages</th>
+                                        <td>{{ user.other_languages or 'N/A' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Country</th>
+                                        <td>{{ user.country }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Course</th>
+                                        <td>{{ user.course }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Mobile Number</th>
+                                        <td>{{ user.mobile_number or 'Not Provided' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">WhatsApp Number</th>
+                                        <td>{{ user.whatsapp_number or 'Not Provided' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Instagram Handle</th>
+                                        <td>{{ user.instagram_handle or 'Not Provided' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">LinkedIn Profile</th>
+                                        <td>{{ user.linkedin_handle or 'Not Provided'}}</td>
+                                    </tr>
+                                    <!-- New Bio Section -->
+                                    <!-- New Interests Section -->
+                                    <tr>
+                                        <th scope="row">Interests</th>
+                                        <td>{{ user.interests or 'Not Provided' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Edit Profile Button -->
+                    <div class="text-center mt-4">
+                        <form action="{{ url_for('message_request', recipient_id=user.id) }}" method="POST">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Send Message Request
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
