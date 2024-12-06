@@ -31,6 +31,7 @@ with open('config.json') as config_file:
     config_data = json.load(config_file)
     mail_config = config_data.get('mail', {})
     redis_config = config_data.get('redis', {})
+    elasticsearch = config_data.get('elasticsearch', {})
 
     # Mail settings
     app.config['MAIL_SERVER'] = mail_config.get('MAIL_SERVER', 'smtp.gmail.com')
@@ -42,6 +43,11 @@ with open('config.json') as config_file:
     # Redis settings
     app.config['REDIS_HOST'] = redis_config.get('REDIS_HOST', 'localhost')
     app.config['REDIS_PORT'] = redis_config.get('REDIS_PORT', 6379)
+
+    app.config['ELASTISEARCH_URL'] = elasticsearch.config.get('elastisearch_url')
+    app.config['API_KEY'] = elasticsearch.config.get('api_key')
+    app.config['CLOUD_ID'] = elasticsearch.config.get('clound_id')
+
 
 # Redis URL for SocketIO
 redis_url = f"redis://{app.config['REDIS_HOST']}:{app.config['REDIS_PORT']}/0"
