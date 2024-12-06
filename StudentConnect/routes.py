@@ -98,7 +98,8 @@ except json.JSONDecodeError:
 
 es = Elasticsearch(
     "https://6eb25373254e449fab3f18eac554e1e1.us-central1.gcp.cloud.es.io:443",
-    api_key=os.getenv('ELASTICSEARCH_API_KEY'))
+    api_key="WlJpM1pKTUIxU1hsT3pZbmJmRmg6ektsSzVrOXZRdmVCZ2l2MV9hYldWQQ=="
+    )
 
 
 try:
