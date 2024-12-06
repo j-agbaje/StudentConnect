@@ -3,7 +3,12 @@
 {
     "elasticsearch":{
         "cloud_id":"My_deployment:dXMtY2VudHJhbDEuZ2NwLmNsb3VkLmVzLmlvOjQ0MyQ2ZWIyNTM3MzI1NGU0NDlmYWIzZjE4ZWFjNTU0ZTFlMSQwYzU4YjA3NGEwMmE0YzY5ODhlYTNlZTc2NWZhM2E0Yg==",
-        "api_key":"WlJpM1pKTUIxU1hsT3pZbmJmRmg6ektsSzVrOXZRdmVCZ2l2MV9hYldWQQ=="
+        "api_key":"WlJpM1pKTUIxU1hsT3pZbmJmRmg6ektsSzVrOXZRdmVCZ2l2MV9hYldWQQ==",
+        "elasticsearch_url": "https://6eb25373254e449fab3f18eac554e1e1.us-central1.gcp.cloud.es.io:443"
+        
+
+    
+
         
     },
     
