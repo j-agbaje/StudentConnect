@@ -44,9 +44,9 @@ with open('config.json') as config_file:
     app.config['REDIS_HOST'] = redis_config.get('REDIS_HOST', 'localhost')
     app.config['REDIS_PORT'] = redis_config.get('REDIS_PORT', 6379)
 
-    app.config['ELASTISEARCH_URL'] = elasticsearch.config.get('elastisearch_url')
-    app.config['API_KEY'] = elasticsearch.config.get('api_key')
-    app.config['CLOUD_ID'] = elasticsearch.config.get('clound_id')
+    app.config['ELASTISEARCH_URL'] = elasticsearch.get('elastisearch_url')
+    app.config['API_KEY'] = elasticsearch.get('api_key')
+    app.config['CLOUD_ID'] = elasticsearch.get('clound_id')
 
 
 # Redis URL for SocketIO
